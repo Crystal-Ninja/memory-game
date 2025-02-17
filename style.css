@@ -49,3 +49,8 @@ body{
  background: linear-gradient(135deg, #11998e, #38ef7d);
  border: none;
 }
+#numcount{
+position: absolute;
+top: 30px;
+font-size: 24px;
+}

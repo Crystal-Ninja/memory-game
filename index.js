@@ -1,6 +1,7 @@
 const grid=document.querySelector(".grid");
 const btn= document.querySelector("btn")
-
+let numcount=document.getElementById("numcount");
+let count=0;
 const symbols=["🍇","🍉","🍓","🫐"];
 const cards=[...symbols,...symbols];
 let cardsflipped=[];
@@ -17,14 +18,15 @@ cards.forEach((symbols)=>{
     const card=document.createElement("div");
     card.classList.add("card");
     card.dataset.symbol=symbols;
-    card.addEventListener("click",flipcard)
-    grid.appendChild(card)
+    card.addEventListener("click",flipcard);
+    grid.appendChild(card);
 })
 function flipcard() {
     if (cardsflipped.length < 2 && !this.classList.contains("flipped")) {
         this.textContent = this.dataset.symbol;
         this.classList.add("flipped");
         cardsflipped.push(this);
+        increment();
         if (cardsflipped.length == 2) {
             setTimeout(checkmatch, 800);
         }
@@ -47,6 +49,7 @@ function checkmatch(){
     cardsflipped=[];
 }
 function reset(){
+    
     cardsflipped=[];
     matchingpair=0;
     const allcards=document.querySelectorAll(".card");
@@ -54,6 +57,10 @@ function reset(){
         cards.textContent="";
         cards.classList.remove("flipped");
     });
+    count=0;
+    numcount.textContent = count
+    
+    
     shuffle(cards);
     grid.innerHTML="";
     cards.forEach((symbols)=>{
@@ -62,6 +69,10 @@ function reset(){
     card.dataset.symbol=symbols;
     card.addEventListener("click",flipcard)
     grid.appendChild(card)
+  
 })
 }
-
+function increment(){
+    count++;
+    numcount.textContent=count;
+}
