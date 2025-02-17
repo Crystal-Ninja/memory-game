@@ -1,4 +1,5 @@
 const grid=document.querySelector(".grid");
+const btn= document.querySelector("btn")
 
 const symbols=["🍇","🍉","🍓","🫐"];
 const cards=[...symbols,...symbols];
@@ -30,7 +31,7 @@ function flipcard() {
     }
 }
 function checkmatch(){
-    const [card1 , card2]=cardsflipped;
+    const [card1,card2]=cardsflipped;
     if (card1.dataset.symbol===card2.dataset.symbol){
         matchingpair++;
         if(matchingpair===symbols.length){
@@ -45,3 +46,22 @@ function checkmatch(){
     }
     cardsflipped=[];
 }
+function reset(){
+    cardsflipped=[];
+    matchingpair=0;
+    const allcards=document.querySelectorAll(".card");
+    allcards.forEach(cards => {
+        cards.textContent="";
+        cards.classList.remove("flipped");
+    });
+    shuffle(cards);
+    grid.innerHTML="";
+    cards.forEach((symbols)=>{
+    const card=document.createElement("div");
+    card.classList.add("card");
+    card.dataset.symbol=symbols;
+    card.addEventListener("click",flipcard)
+    grid.appendChild(card)
+})
+}
+
